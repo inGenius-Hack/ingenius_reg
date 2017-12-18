@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+		{% block extrahead %}
+
+		<title>Login | inGenius 2017</title>
+
+    {% endblock %}
+
+
+    {% block content %}
+		<div id="main" class="container">
+
+	    {% if message %}
+	    <div class="12u box {{ messageclass }}">
+	    	{{ message }}
+	    </div>
+	    {% endif %}
+
+	    <div class="row">
+	    <div class="4u$ -4u 12u(small)">
+	        <form action="" method="POST">
+	            {% csrf_token %}
+	            {{form.as_p}}
+	            <input type="submit" value="Login" />
+	        </form>
+	    </div>
+	    </div>
+			<div class="push"></div>
+		</div>
+
+	    {% endblock %}

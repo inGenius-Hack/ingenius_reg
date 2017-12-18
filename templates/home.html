@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block extrahead %}
+<title>Home | inGenius 2017</title>
+{% endblock %}
+
+{% block content %}
+<!-- Banner -->
+  <section id="banner">
+    <img src="{% static 'images/logo_light.png' %}" width="50%"  alt="inGenius 2015" />
+    
+    <p style="font-size:22px;">Get. Set. Hack.</p>
+    <ul class="actions">
+      {% if not request.user.is_authenticated %}
+      <li><a href="/login" class="button alt">Login</a></li>
+      {% endif %}
+    </ul>
+  </section>
+
+<!-- Main -->
+
+{% endblock %}

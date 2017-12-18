@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block extrahead %}
+<title>404 | inGenius 2015</title>
+{% endblock %}
+
+{% block content %}
+<!-- Banner -->
+  <section id="banner">
+    <img src="{% static 'images/logo_large.png' %}" width="411" height="411" alt="inGenius 2015" />
+    <h2>inGenius 2015</h2>
+    <p>Get. Set. Hack.</p>
+    <hr class="major">
+    <h1>404 - Page not found</h1>
+    <ul class="actions">
+      {% if not request.user.is_authenticated %}
+      <li><a href="/login" class="button alt">Login</a></li>
+      {% endif %}
+    </ul>
+  </section>
+
+<!-- Main -->
+
+{% endblock %}

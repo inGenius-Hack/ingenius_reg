@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+		{% block extrahead %}
+
+		<title>Stats | inGenius 2017</title>
+
+    {% endblock %}
+
+
+    {% block content %}
+		<div id="main" class="container">
+			<h2>Stats</h2>
+			<hr class="major">
+	    {% if message %}
+	    <div class="12u box {{ messageclass }}">
+	    	{{ message }}
+	    </div>
+	    {% endif %}
+			<div class="row">
+				<div class="6u stat-card-wide stat-card">
+					<h2>Teams</h2>
+					<p class="">{{ teams }}</p>
+				</div>
+				<div class="6u stat-card-wide stat-card">
+					<h2>Participants</h2>
+					<p class="">{{ participants }}</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="4u stat-card">
+					<h3>Registered</h3>
+					<p class="">{{ registered }}</p>
+				</div>
+				<div class="4u stat-card">
+					<h3>Checked-in</h3>
+					<p class="">{{ checked_in }}</p>
+				</div>
+				<div class="4u stat-card">
+					<h3>Paid</h3>
+					<p class="">{{ paid }}</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="4u stat-card">
+					<h3>Had Lunch</h3>
+					<p class="">{{ had_lunch }}</p>
+				</div>
+				<div class="4u stat-card">
+					<h3>Had Dinner</h3>
+					<p class="">{{ had_dinner }}</p>
+				</div>
+				<div class="4u stat-card">
+					<h3>Had Breakfast</h3>
+					<p class="">{{ had_breakfast }}</p>
+				</div>
+			</div>
+			<div class="push"></div>
+		</div>
+	  {% endblock %}

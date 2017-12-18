@@ -1,0 +1,56 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html>
+<head>
+  <title>Dashboard | inGenius 2017</title>
+  <meta charset="utf-8">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.countdown.min.js' %}"></script>
+
+  <style type="text/css">
+  body {
+    font-family: 'Roboto', Helvetica, sans-serif;
+    color: #000;
+  }
+  #countdown {
+    margin-top: 20px;
+    font-size: 100px;
+    font-weight: 300;
+    text-align: center;
+  }
+  .triggers {
+    float:right;
+    color: rgba(0, 0, 0, 0.5);
+  }
+  a, a:active, a:visited, a:focus {
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="triggers">
+      <a href="#" class="start">Resume</a>
+      <a href="#" class="stop">Pause</a>
+    </div>
+    <div id="countdown"></div>
+  </div>
+
+  <script type="text/javascript">
+  var ctdn = $('#countdown');
+  ctdn.countdown("2015/10/01 12:00:00",function(event){
+    $(this).html(event.strftime('%H:%M:%S'));
+  });
+  $('.start').click(function(){
+    ctdn.countdown('start');
+  });
+  $('.stop').click(function(){
+    ctdn.countdown('stop');
+  });
+  </script>
+</body>
+</html>

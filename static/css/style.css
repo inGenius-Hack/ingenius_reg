@@ -1,0 +1,59 @@
+/* Custom CSS */
+
+.success {
+	background-color: rgba(209, 246, 217, 1);
+	margin: 15px 0;
+	color: rgba(38, 110, 69, 1);
+	border-radius: 3px;
+	padding: 10px;
+}
+
+.error {
+	background-color: #f3cac0;
+	margin: 15px 0;
+	color: rgba(162, 39, 57, 1);
+	border-radius: 3px;
+	padding: 10px;
+}
+.stat-card p {
+	font-size: 72px;
+	font-weight: bold;
+	margin: 10px;
+}
+.stat-card-wide {
+	width: 48.5% !important;
+}
+.stat-card {
+	width: 32%;
+	box-sizing: border-box;
+	border: 1px solid #d5d5d5;
+	padding: 2em;
+	margin: 0 10px 10px 0
+}
+.minor {
+	margin: 0 0 15px 0;
+}
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+.container {
+	min-height: 100%;
+	height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+	height: 100%;
+	margin: 0 auto -155px; /* the bottom margin is the negative value of the footer's height */
+}
+footer, .push {
+	height: 155px; /* .push must be the same height as .footer */
+}
+footer {
+	border-top: 1px solid #dfdfdf;
+}
+/*
+
+Sticky Footer by Ryan Fait
+http://ryanfait.com/
+
+*/

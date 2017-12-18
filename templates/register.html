@@ -1,0 +1,126 @@
+
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+		{% block extrahead %}
+
+		<title>Registration | inGenius 2017</title>
+
+        <style type="text/css">
+        .participant-details {
+        	background-color: rgba(0,0,0,0.03);
+        }
+				.paid {
+					color: #286c17;
+					font-size: 1.1em;
+					font-weight: bold;
+				}
+				.not-paid {
+					color: #ce223b;
+					font-size: 1.1em;
+					font-weight: bold;
+				}
+				.change-button {
+					pointer: cursor;
+					float:right;
+				}
+        </style>
+
+        {% endblock %}
+
+
+        {% block content %}
+
+        <div id="main" class="container">
+				<h2><a href="{% url 'register' %}">Registration</a></h2>
+		    {% if message %}
+		    <div class="12u {{ messageclass }}">
+		    	{{ message }}
+		    </div>
+		    {% endif %}
+
+		    <div class="row">
+		    <div class="6u 12u(small)">
+	    	<div class="row">
+		        <form action="" method="POST">
+		            {% csrf_token %}
+		            {{form.as_p}}
+		            <input type="submit" value="Submit" />
+		        </form>
+		    </div>
+		    </div>
+		    <div class="6u 12u(small)">
+				<div class="row">
+			        {% if participant_details %}
+			        <div class="box participant-details 12u">
+								<div class="row">
+					        <h3>Participant details</h3>
+									<div class="change-button">
+										<a class="button small" href="/admin/reg/participant/{{ participant_details.pid }}/" target="_blank">Change</a>
+									</div>
+								</div>
+								<hr class="minor">
+				        <div class="row">
+				        	<p class="4u"><strong>Participant ID:</strong> {{ participant_details.participant_id }}</p>
+				        	<p class="4u"><strong>Barcode:</strong> {{ participant_details.barcode }}</p>
+									{% if participant_details.paid == 'Yes' %}
+									<p class="4u"><strong>Paid:</strong> <span class="paid">{{ participant_details.paid }}</span></p>
+									{% else %}
+									<p class="4u"><strong>Paid:</strong> <span class="not-paid">{{ participant_details.paid }}</span></p>
+									{% endif %}
+        				</div>
+								<div class="row">
+									<p class="12u"><strong>Team checked-in:</strong> {{ participant_details.team_checked_in }}</p>
+								</div>
+								<hr class="minor">
+				        <div class="row">
+					        <p class="6u"><strong>Name:</strong> {{ participant_details.name }}</p>
+					        <p class="6u"><strong>Phone:</strong> {{ participant_details.phone }}</p>
+					    	</div>
+				        <div class="row">
+				        	<p class="6u"><strong>Team name:</strong> {{ participant_details.team_name }}</p>
+				        	<p class="6u"><strong>Gender:</strong> {{ participant_details.gender }}</p>
+				        </div>
+								<div class="row">
+									<p class="12u"><strong>College:</strong> {{ participant_details.college }}</p>
+								</div>
+								<div class="row">
+				        	<p class="12u"><strong>Email id:</strong> {{ participant_details.email }}</p>
+				        </div>
+								<hr class="minor">
+				        <div class="row">
+				        	<p class="6u"><strong>Checked-in:</strong> {{ participant_details.checked_in }}</p>
+				        	<p class="6u"><strong>Registered:</strong> {{ participant_details.registered }}</p>
+				        </div>
+			        </div>
+				    </div>
+			        {% endif %}
+			    </div>
+		    </div>
+				<div class="push"></div>
+		    </div>
+
+		    {% if form_type == 1 %}
+
+	    	<script>
+	    	$(document).ready(function (){
+	    		$('#id_pid').focus();
+	    	});
+	    	</script>
+
+	    	{% endif %}
+
+	    	{% if form_type == 2 %}
+
+	    	<script>
+	    	$(document).ready(function (){
+	    		$('#id_barcode').focus();
+	    	});
+	    	</script>
+
+	    	{% endif %}
+
+    	</div>
+
+	    {% endblock %}

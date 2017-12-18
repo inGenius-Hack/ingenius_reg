@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+		{% block extrahead %}
+
+		<title>Lunch | inGenius 2017</title>
+
+    {% endblock %}
+
+
+    {% block content %}
+		<div id="main" class="container">
+
+	    {% if message %}
+	    <div class="12u box {{ messageclass }}">
+	    	{{ message }}
+	    </div>
+	    {% endif %}
+
+	    <div class="row">
+	    <div class="4u$ -4u 12u(small)">
+        <h3>Lunch (Day 1)</h3>
+	        <form action="" method="POST">
+	            {% csrf_token %}
+	            {{form.as_p}}
+	            <input type="submit" value="Submit" />
+	        </form>
+	    </div>
+	    </div>
+			<div class="push"></div>
+		</div>
+    <script>
+		$(document).ready(function (){
+			$('#id_barcode').focus();
+		});
+		</script>
+	    {% endblock %}
