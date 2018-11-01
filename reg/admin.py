@@ -8,7 +8,7 @@ class ParticipantAdmin(admin.ModelAdmin):
             'gender', 'phone', 'email', 'college', 'github_url',
             'linkedin_url']}),
         ('Event Information',       {'fields': ['team', 'barcode', 'registered',
-            'paid', 'checked_in', 'had_lunch', 'had_dinner', 'had_breakfast',
+            'paid', 'checked_in', 'had_lunch', 'had_dinner', 'had_snacks_evening','had_snacks_midnight','had_breakfast',
             'noc_submitted', 'recharge_possible']})
     ]
     list_display = ('participant_id', 'name', 'team', 'phone', 'email', 'gender', 'paid')

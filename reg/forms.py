@@ -36,3 +36,9 @@ class BreakfastForm(forms.Form):
 
 class DinnerForm(forms.Form):
 	barcode = forms.CharField(max_length=50, required=True)
+
+class SnacksEveningForm(forms.Form):
+	barcode = forms.CharField(max_length=50, required=True)	
+
+class SnacksMidnightForm(forms.Form):
+	barcode = forms.CharField(max_length=50, required=True)	

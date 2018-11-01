@@ -52,8 +52,6 @@ def main():
                 college=item[7].strip(),
                 email=item[5].strip(),
                 phone=str(item[6]),
-                noc_submitted=True,
-                paid=True,
                 team=t
             )
 
@@ -64,8 +62,6 @@ def main():
                 college=item[13].strip(),
                 email=item[11].strip(),
                 phone=str(item[12]),
-                noc_submitted=True,
-                paid=True,
                 team=t
             )
 
@@ -77,8 +73,6 @@ def main():
                     college=item[19].strip(),
                     email=item[17].strip(),
                     phone=str(item[18]),
-                    noc_submitted=True,
-                    paid=True,
                     team=t
                 )
 
