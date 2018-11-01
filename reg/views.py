@@ -6,7 +6,7 @@ from django.db.models import Max
 
 from .models import Participant, Team
 from .forms import LoginForm, CheckInForm, LunchForm, BreakfastForm, RegForm, \
-	DinnerForm
+	DinnerForm,SnacksEveningForm,SnacksMidnightForm
 
 def login_user(request):
 	context = {}
@@ -79,10 +79,12 @@ def register(request):
 
 			pid = str(data['pid'])
 			barcode	= str(data['barcode'])
-			noc_submitted = data.get('noc_submitted',None)
+			noc_submitted = data.get('noc_submitted')
 			show_noc = False
 			show_rp = False
 			show_sp = False
+
+			# If the Participant is already registered and has a barcode
 
 			if not barcode:
 				try:
@@ -144,6 +146,8 @@ def register(request):
 
 				return render(request,'register.html',context)
 
+			# If the team doesn't have a barcode and is not registered	
+				
 			else:
 				try:
 					if len(pid) == 4:
@@ -168,7 +172,7 @@ def register(request):
 				team_id = None
 
 				if not p.is_team_checked_in():
-					print "Inside if 1"
+					print("Inside if 1")
 					_t = Team.objects.all()
 					_p = Participant.objects.filter(registered=True)
 					if len(_p) == 0:
@@ -190,6 +194,7 @@ def register(request):
 				p.registered = True
 				p.paid = True
 				p.checked_in = True
+				p.noc_submitted = noc_submitted
 				p.save()
 
 				form = RegForm(hide_barcode=True)
@@ -323,6 +328,87 @@ def breakfast(request):
 		context['form'] = BreakfastForm()
 
 	return render(request,'breakfast.html',context)
+
+@login_required(login_url='/login')
+def snacks_evening(request):
+	context = {}
+
+	if request.method == "GET":
+		form = SnacksEveningForm()
+		context['form'] = form
+		return render(request,'snacksevening.html',context)
+
+	elif request.method == "POST":
+		form = SnacksEveningForm(request.POST)
+
+		if form.is_valid():
+			form_data = form.cleaned_data
+
+			barcode = form_data['barcode']
+
+			p = Participant.objects.filter(barcode=barcode)
+
+			if p.exists():
+				p = p[0]
+				context['messageclass'] = 'success'
+				if p.had_snacks_evening== True:
+					context['messageclass'] = 'error'
+					context['message'] = "Evening Snacks request was already \
+						processed for {}.".format(p.name)
+				else:
+					p.had_snacks_evening = True
+					p.save()
+					context['messageclass'] = 'success'
+					context['message'] = "Evening Snacks request successfully \
+						processed for {}.".format(p.name)
+			else:
+				context['messageclass'] = 'error'
+				context['message'] = "Couldn't find a user with that barcode."
+
+		context['form'] = SnacksEveningForm()
+
+	return render(request,'snacksevening.html',context)
+
+@login_required(login_url='/login')
+def snacks_midnight(request):
+	context = {}
+
+	if request.method == "GET":
+		form = SnacksMidnightForm()
+		context['form'] = form
+		return render(request,'snacksmidnight.html',context)
+
+	elif request.method == "POST":
+		form = SnacksMidnightForm(request.POST)
+
+		if form.is_valid():
+			form_data = form.cleaned_data
+
+			barcode = form_data['barcode']
+
+			p = Participant.objects.filter(barcode=barcode)
+
+			if p.exists():
+				p = p[0]
+				context['messageclass'] = 'success'
+				if p.had_snacks_midnight== True:
+					context['messageclass'] = 'error'
+					context['message'] = "Midnight Snacks request was already \
+						processed for {}.".format(p.name)
+				else:
+					p.had_snacks_midnight = True
+					p.save()
+					context['messageclass'] = 'success'
+					context['message'] = "Midnight Snacks request successfully \
+						processed for {}.".format(p.name)
+			else:
+				context['messageclass'] = 'error'
+				context['message'] = "Couldn't find a user with that barcode."
+
+		context['form'] = SnacksMidnightForm()
+
+	return render(request,'snacksmidnight.html',context)	
+
 
 @login_required(login_url='/login')
 def check_in(request):

@@ -11,7 +11,7 @@ class Team(models.Model):
         ('zwibe', 'Zwibe')
     )
     name = models.CharField(max_length=50)
-    idea = models.TextField()
+    idea = models.TextField(blank=True)
     domain = models.CharField(max_length=10, choices=DOMAIN_CHOICES, blank=True)
     team_id = models.PositiveIntegerField(blank=True, null=True)
 
@@ -51,10 +51,12 @@ class Participant(models.Model):
     registered = models.BooleanField(default=False)
     checked_in = models.BooleanField(default=False)
     paid = models.BooleanField(default=False)
-    noc_submitted = models.NullBooleanField(null=True)
+    noc_submitted = models.BooleanField(default=True)
     had_lunch = models.BooleanField(default=False)
     had_dinner = models.BooleanField(default=False)
     had_breakfast = models.BooleanField(default=False)
+    had_snacks_evening = models.BooleanField(default=False)
+    had_snacks_midnight = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
